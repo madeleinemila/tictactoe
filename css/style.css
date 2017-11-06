@@ -29,7 +29,7 @@ html, body {
 
 .game-board {
   box-sizing: border-box;
-  width: 700px;
+  width: 800px;
   /*height: 700px;*/
   margin: 0 auto;
   background-color: grey;
