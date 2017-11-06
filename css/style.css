@@ -1,5 +1,5 @@
 * {
-  border: 1px pink solid;
+  /*border: 1px pink solid;*/
 }
 
 html, body {
@@ -21,17 +21,27 @@ html, body {
   background-color: grey;
 }
 
-.flex-row {
+.row {
   display: -webkit-flex; /* TODO check if need other prefixes e.g. moz */
   display: flex;
   /*margin: 0;
   align-content: space-between;*/
 }
 
-.flex-cell {
+.cell {
   -webkit-flex: 1;
   flex: 1;
   background-color: darkgrey;
   width: 200px;
   height: 200px;
+  border: 2px solid black;
+}
+
+.xo {
+  max-width: 200px;
+  margin: 0 auto;
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 200px;
 }
