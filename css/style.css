@@ -1,0 +1,37 @@
+* {
+  border: 1px pink solid;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%; /* for sticky footer */
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.game-board {
+  box-sizing: border-box;
+  width: 700px;
+  /*height: 700px;*/
+  margin: 0 auto;
+  background-color: grey;
+}
+
+.flex-row {
+  display: -webkit-flex; /* TODO check if need other prefixes e.g. moz */
+  display: flex;
+  /*margin: 0;
+  align-content: space-between;*/
+}
+
+.flex-cell {
+  -webkit-flex: 1;
+  flex: 1;
+  background-color: darkgrey;
+  width: 200px;
+  height: 200px;
+}
