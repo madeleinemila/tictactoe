@@ -49,21 +49,44 @@ $(document).ready(function () {
   const checkForWin = function () {
     // check row for win
     for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
-      // console.log($(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text());
       if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) {
         break;
       }
-      if (i === numRows -1) {
+      if (i === numRows - 1) { // i.e. we've finished iterating but before we exit
         gameOver = true;
         return;
       }
     }
     // check column for win
-
+    for (let i = 0; i < numRows; i++) {
+      if ( $(`.row:eq(${ i }) .xo:eq(${ lastCol })`).text() !== lastMove ) {
+        break;
+      }
+      if (i === numRows - 1) {
+        gameOver = true;
+        return;
+      }
+    }
     // check positive diag for win
-
+    for (let i = 0; i < numRows; i++) {
+      if ( $(`.row:eq(${ i }) .xo:eq(${ i })`).text() !== lastMove ) {
+        break;
+      }
+      if (i === numRows - 1) {
+        gameOver = true;
+        return;
+      }
+    }
     // check negative diag for win
-
+    for (let i = numRows - 1; i < 0; i--) {
+      if ( $(`.row:eq(${ i }) .xo:eq(${ i })`).text() !== lastMove ) {
+        break;
+      }
+      if (i === 0) {
+        gameOver = true;
+        return;
+      }
+    }
   };
 
 
