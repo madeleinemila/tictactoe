@@ -23,14 +23,20 @@ $(document).ready(function () {
     $('.xo').text('');
     gameOver = false;
     xTurn = true;
+    $('.player-console>p').text('');
     $('.restart').addClass('hidden');
+    lastRow = -1;
+    lastCol = -1;
+    lastMove = '';
   };
 
 
   const populateCell = function ( cellNum ) {
+    if (gameOver) {
+      return;
+    }
     // if cell is used, exit
     if ($('.xo').eq( cellNum ).text()) {
-      console.log( `That cell is taken` );
       return;
     }
     // else
@@ -46,10 +52,10 @@ $(document).ready(function () {
     // update last row/cell variables
     lastRow = $('.xo').eq( cellNum ).parent().parent().index();
     lastCol = cellNum % numRows;
-
+    console.log( `Row ${ lastRow } Col ${ lastCol }` );
     checkForWin();
     if (gameOver) {
-      console.log(`Game over!`);
+      $('.player-console>p').text('Game over!');
       $('.restart').removeClass('hidden');
     }
   };
@@ -76,7 +82,7 @@ $(document).ready(function () {
         return;
       }
     }
-    // check positive diag for win
+    // check negative diag for win
     for (let i = 0; i < numRows; i++) {
       if ( $(`.row:eq(${ i }) .xo:eq(${ i })`).text() !== lastMove ) {
         break;
@@ -86,12 +92,12 @@ $(document).ready(function () {
         return;
       }
     }
-    // check negative diag for win
-    for (let i = numRows - 1; i < 0; i--) {
-      if ( $(`.row:eq(${ i }) .xo:eq(${ i })`).text() !== lastMove ) {
-        break;
-      }
-      if (i === 0) {
+    // check positive diag for win
+    for (let i = 0; i < numRows; i++) {
+        if ( $(`.row:eq(${ i }) .xo:eq(${ numRows - 1 - i })`).text() !== lastMove ) {
+          break;
+        }
+      if (i === numRows - 1) {
         gameOver = true;
         return;
       }
@@ -99,7 +105,7 @@ $(document).ready(function () {
   };
 
 
-
+// console.log( `Row ${i} Col ${j} checking...` );
 
   // *********** EVENT HANDLERS *************
   // if a game cell is clicked
