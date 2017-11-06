@@ -1,17 +1,24 @@
-
-
-
-
-
 $(document).ready(function () {
-  // create flag for which turn, and initialise to start with X
+
+
+
+  // flag for which turn, and initialise to start with X
   let xTurn = true;
-  // get number of cells
+  // flag for won game
+  let gameOver = false;
+
+  // get number of cells & rows
   const numCells = $('.xo').length;
+  const numRows = $('.row').length;
+
+  // variables to hold data of last cell clicked, init to -1 so it doesn't apply to any cell
+  let lastRow = -1;
+  let lastCol = -1;
+  let lastMove = '';
 
 
 
-  // ******** POPULATE CELL FUNCTION ************
+  // ******** FUNCTIONS ************
   const populateCell = function ( cellNum ) {
     // if cell is used, exit
     if ($('.xo').eq( cellNum ).text()) {
@@ -20,13 +27,46 @@ $(document).ready(function () {
     }
     // else
     if (xTurn) { // put an X
-      $('.xo').eq( cellNum ).text('X');
+      $('.xo').eq( cellNum ).text('x');
+      lastMove = 'x';
       xTurn = false;
     } else { // put a O
-      $('.xo').eq( cellNum ).text('O');
+      $('.xo').eq( cellNum ).text('o');
+      lastMove = 'o';
       xTurn = true;
     }
+    // update last row/cell variables
+    lastRow = $('.xo').eq( cellNum ).parent().parent().index();
+    lastCol = cellNum % numRows;
+
+    checkForWin();
+    if (gameOver) {
+      console.log(`Game over!`);
+    }
   };
+
+
+  const checkForWin = function () {
+    // check row for win
+    for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
+      // console.log($(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text());
+      if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) {
+        break;
+      }
+      if (i === numRows -1) {
+        gameOver = true;
+        return;
+      }
+    }
+    // check column for win
+
+    // check positive diag for win
+
+    // check negative diag for win
+
+  };
+
+
 
 
   // *********** EVENT HANDLERS *************
