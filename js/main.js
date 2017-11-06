@@ -6,6 +6,8 @@ $(document).ready(function () {
   let xTurn = true;
   // flag for won game
   let gameOver = false;
+  // variable for draw handling
+  let numCellsFilled = 0;
 
   // get number of cells & rows
   const numCells = $('.xo').length;
@@ -25,11 +27,11 @@ $(document).ready(function () {
     xTurn = true;
     $('.player-console>p').text('');
     $('.restart').addClass('hidden');
-    lastRow = -1;
-    lastCol = -1;
-    lastMove = '';
+    // lastRow = -1;
+    // lastCol = -1;
+    // lastMove = '';
+    numCellsFilled = 0;
   };
-
 
   const populateCell = function ( cellNum ) {
     if (gameOver) {
@@ -43,23 +45,25 @@ $(document).ready(function () {
     if (xTurn) { // put an X
       $('.xo').eq( cellNum ).text('x');
       lastMove = 'x';
+      numCellsFilled ++;
       xTurn = false;
     } else { // put a O
       $('.xo').eq( cellNum ).text('o');
       lastMove = 'o';
+      numCellsFilled ++;
       xTurn = true;
     }
     // update last row/cell variables
     lastRow = $('.xo').eq( cellNum ).parent().parent().index();
     lastCol = cellNum % numRows;
-    console.log( `Row ${ lastRow } Col ${ lastCol }` );
+    // console.log( `Row ${ lastRow } Col ${ lastCol }` );
     checkForWin();
     if (gameOver) {
       $('.player-console>p').text('Game over!');
       $('.restart').removeClass('hidden');
     }
+    checkForDraw();
   };
-
 
   const checkForWin = function () {
     // check row for win
@@ -104,8 +108,12 @@ $(document).ready(function () {
     }
   };
 
-
-// console.log( `Row ${i} Col ${j} checking...` );
+  const checkForDraw = function () {
+    if ( numCellsFilled === numCells ) {
+      $('.player-console>p').text("It's a draw");
+      $('.restart').removeClass('hidden');
+    }
+  };
 
   // *********** EVENT HANDLERS *************
   // if a game cell is clicked
