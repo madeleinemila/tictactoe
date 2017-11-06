@@ -1,21 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:700i');
+
+
 * {
   /*border: 1px pink solid;*/
-}
-
-html {
-    -webkit-tap-highlight-color: transparent; /* stop highlight showing up when clicking boxes */
 }
 
 html, body {
 	margin: 0;
 	padding: 0;
-	height: 100%; /* for sticky footer */
+	height: 100%; /* for sticky footer & flex boxes */
 }
 
-.noselect { /* to get rid of ugly highlight if user accidentally dbl clicks TODO could condense this */
+.noselect { /* to get rid of ugly highlight if user accidentally dbl clicks */
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
@@ -28,36 +26,72 @@ html, body {
 }
 
 .game-board {
-  box-sizing: border-box;
   width: 800px;
-  /*height: 700px;*/
-  margin: 0 auto;
-  background-color: grey;
+  height: 800px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -o-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background-color: #afafaf;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
 }
 
 .row {
-  display: -webkit-flex; /* TODO check if need other prefixes e.g. moz */
+  background-color: #e5e5e5;
+  -webkit-flex: 5;
+  -moz-flex: 5;
+  -ms-flex: 5;
+  -o-flex: 5;
+  flex: 5;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  /*margin: 0;
-  align-content: space-between;*/
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
 }
 
 .cell {
-  -webkit-flex: 1;
-  flex: 1;
-  background-color: darkgrey;
-  width: 200px;
-  height: 200px;
-  border: 2px solid black;
+  background-color: #cacaca;
+  -webkit-flex: 4;
+  -moz-flex: 4;
+  -ms-flex: 4;
+  -o-flex: 4;
+  flex: 4;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -webkit-flex-flow: column wrap;
+  -moz-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  -o-flex-flow: column wrap;
+  flex-flow: column wrap;
+  border: cornsilk 1px solid;
 }
 
 .xo {
-  max-width: 200px;
-  margin: 0 auto;
-  font-size: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  line-height: 200px;
+  font-size: 70px;
+  font-family: 'Space Mono', monospace;
+  /*font-weight: bold;
+  font-style: italic;*/
 }
 
 .hidden {
