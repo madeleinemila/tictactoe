@@ -19,6 +19,14 @@ $(document).ready(function () {
 
 
   // ******** FUNCTIONS ************
+  const restartGame = function () {
+    $('.xo').text('');
+    gameOver = false;
+    xTurn = true;
+    $('.restart').addClass('hidden');
+  };
+
+
   const populateCell = function ( cellNum ) {
     // if cell is used, exit
     if ($('.xo').eq( cellNum ).text()) {
@@ -42,6 +50,7 @@ $(document).ready(function () {
     checkForWin();
     if (gameOver) {
       console.log(`Game over!`);
+      $('.restart').removeClass('hidden');
     }
   };
 
@@ -93,9 +102,14 @@ $(document).ready(function () {
 
 
   // *********** EVENT HANDLERS *************
+  // if a game cell is clicked
   for (let i = 0; i < numCells; i++) {
     $('.cell').eq(i).on( 'click', populateCell.bind(null, i) );
   }
+
+  // if restart button is clicked
+  $('.restart').on( 'click', restartGame );
+
 
 
 

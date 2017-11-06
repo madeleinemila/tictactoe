@@ -59,3 +59,7 @@ html, body {
   text-transform: uppercase;
   line-height: 200px;
 }
+
+.hidden {
+  visibility: hidden;
+}
