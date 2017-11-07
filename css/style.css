@@ -123,3 +123,5 @@ header {
   display: inline;
   float: right;
 }
+
+/*TODO adjust font size and margin-top (to neg value) for larger num of cells*/
