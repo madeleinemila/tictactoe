@@ -60,30 +60,30 @@
   };
 
   const takeTurn = function ( cellNum ) {
+    // checks
     if (gameOver) return;
     if ($('.xo').eq( cellNum ).text()) { // if cell is taken
       return;
     }
-    // else
+    // hide AI toggle since game has commenced
+    $('.ai-toggle').addClass('hidden');
+    // gameplay start
     populateCell( cellNum );
     checkForWin();
     if (gameOver) {
-      $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
-      $('.replay').removeClass('hidden');
-      $('.level-up').removeClass('hidden');
+      renderGameOver();
       return;
     }
     checkForDraw();
     if ( checkForDraw === true ) return;
+    if ( false === ai.on ) return;
     // AI turn
     const aiMove = ai.choose();
     console.log( aiMove );
     populateCell( aiMove );
     checkForWin();
-    if (gameOver) { // TODO refactor this bit same as above
-      $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
-      $('.replay').removeClass('hidden');
-      $('.level-up').removeClass('hidden');
+    if (gameOver) {
+      renderGameOver();
       return;
     }
     checkForDraw();
@@ -152,10 +152,18 @@
     }
   };
 
+  const renderGameOver = function () {
+      $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
+      $('.replay').removeClass('hidden');
+      $('.level-up').removeClass('hidden');
+      $('.ai-toggle').removeClass('hidden');
+  };
+
   const checkForDraw = function () {
     if ( numCellsFilled === numCells ) {
       $('.player-console>p').text("It's a draw");
       $('.replay').removeClass('hidden');
+      $('.ai-toggle').removeClass('hidden');
       return true;
     }
     // return false; // do i need this? cos return undefined is falsey?
