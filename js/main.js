@@ -86,9 +86,10 @@
     // console.log( `Row ${ lastRow } Col ${ lastCol }` );
     checkForWin();
     if (gameOver) {
-      $('.player-console>p').text('Game over!');
+      $('.player-console>p').text(`GAME OVER - "${ lastMove.toUpperCase() }" TAKES THE WIN!`);
       $('.replay').removeClass('hidden');
       $('.level-up').removeClass('hidden');
+      return;
     }
     checkForDraw();
   };
