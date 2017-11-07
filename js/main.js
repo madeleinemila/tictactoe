@@ -54,7 +54,7 @@ $(document).ready(function () {
       xTurn = true;
     }
     // update last row/cell variables
-    lastRow = $('.xo').eq( cellNum ).parent().parent().index();
+    lastRow = ( $('.xo').eq( cellNum ).parent().parent().index() ) - 1; // -1 to discount game header
     lastCol = cellNum % numRows;
     // console.log( `Row ${ lastRow } Col ${ lastCol }` );
     checkForWin();
@@ -68,6 +68,7 @@ $(document).ready(function () {
   const checkForWin = function () {
     // check row for win
     for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
+      console.log( lastRow, i);
       if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) {
         break;
       }

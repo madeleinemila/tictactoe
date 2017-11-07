@@ -26,7 +26,7 @@ html, body {
 }
 
 .game-board {
-  width: 800px;
+  width: 640px;
   height: 800px;
   display: -webkit-box;
   display: -moz-box;
@@ -94,6 +94,26 @@ html, body {
   font-style: italic;*/
 }
 
+.game-header, .player-console {
+  box-sizing: border-box;
+  height: 80px;
+  padding: 15px;
+}
+
 .hidden {
   visibility: hidden;
+}
+
+.restart {
+  margin: 1em 0;
+}
+
+.float-left {
+  display: inline;
+  float: left;
+}
+
+.float-right {
+  display: inline;
+  float: right;
 }
