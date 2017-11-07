@@ -14,6 +14,8 @@
   let numCellsFilled = 0;
   // variable for current level
   let level = 1;
+  // init display to show first level num
+  $('#level-num').text( level );
 
   // get number of cells & rows
   let numCells = $('.xo').length;
@@ -43,6 +45,8 @@
     updateListeners( numCells );
     restartGame();
     $('.level-up').addClass('hidden');
+    level ++;
+    $('#level-num').text( level );
   };
 
   const restartGame = function () {
