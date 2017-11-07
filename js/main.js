@@ -41,21 +41,18 @@
     // console.log( `numCells ${ numCells } numRows ${ numRows }` );
     // now add new listeners
     updateListeners( numCells );
+    restartGame();
+    $('.level-up').addClass('hidden');
   };
-
-
-
 
   const restartGame = function () {
     $('.xo').text('');
     gameOver = false;
     xTurn = true;
     $('.player-console>p').text('');
-    $('.restart').addClass('hidden');
-    // lastRow = -1;
-    // lastCol = -1;
-    // lastMove = '';
+    $('.replay').addClass('hidden');
     numCellsFilled = 0;
+    $('.level-up').addClass('hidden');
   };
 
   const populateCell = function ( cellNum ) {
@@ -86,7 +83,8 @@
     checkForWin();
     if (gameOver) {
       $('.player-console>p').text('Game over!');
-      $('.restart').removeClass('hidden');
+      $('.replay').removeClass('hidden');
+      $('.level-up').removeClass('hidden');
     }
     checkForDraw();
   };
@@ -138,7 +136,7 @@
   const checkForDraw = function () {
     if ( numCellsFilled === numCells ) {
       $('.player-console>p').text("It's a draw");
-      $('.restart').removeClass('hidden');
+      $('.replay').removeClass('hidden');
     }
   };
 
@@ -161,9 +159,11 @@
   // if a game cell is clicked
   updateListeners( numCells );
 
-  // if restart button is clicked
-  $('.restart').on( 'click', restartGame );
+  // if replay button is clicked
+  $('.replay').on( 'click', restartGame );
 
+  // if level up button is clicked
+  $('.level-up').on( 'click', levelUp );
 
 
 

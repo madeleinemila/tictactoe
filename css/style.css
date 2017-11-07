@@ -110,8 +110,8 @@ header {
   visibility: hidden;
 }
 
-.restart {
-  margin: 1em 0;
+.replay, .level-up {
+  margin: 14px 7px;
 }
 
 .float-left {
