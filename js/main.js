@@ -2,7 +2,7 @@
 
 
 
-// $(document).ready(function () { TODO uncomment when finished
+// $(document).ready(function () { TODO uncomment when finished TODO turn all this into a game object
 
 
 
@@ -59,31 +59,13 @@
     $('.level-up').addClass('hidden');
   };
 
-  const populateCell = function ( cellNum ) {
-    console.log( cellNum );
-    if (gameOver) {
-      return;
-    }
-    // if cell is used, exit
-    if ($('.xo').eq( cellNum ).text()) {
+  const takeTurn = function ( cellNum ) {
+    if (gameOver) return;
+    if ($('.xo').eq( cellNum ).text()) { // if cell is taken
       return;
     }
     // else
-    if (xTurn) { // put an X
-      $('.xo').eq( cellNum ).text('x');
-      lastMove = 'x';
-      numCellsFilled ++;
-      xTurn = false;
-    } else { // put a O
-      $('.xo').eq( cellNum ).text('o');
-      lastMove = 'o';
-      numCellsFilled ++;
-      xTurn = true;
-    }
-    // update last row/cell variables
-    lastRow = ( $('.xo').eq( cellNum ).parent().parent().index() ) - 1; // -1 to discount game header
-    lastCol = cellNum % numRows;
-    // console.log( `Row ${ lastRow } Col ${ lastCol }` );
+    populateCell( cellNum );
     checkForWin();
     if (gameOver) {
       $('.player-console>p').text(`GAME OVER - "${ lastMove.toUpperCase() }" TAKES THE WIN!`);
@@ -92,6 +74,38 @@
       return;
     }
     checkForDraw();
+    if ( checkForDraw === true ) return;
+    // AI turn
+    const aiMove = ai.choose();
+    console.log( aiMove );
+    populateCell( aiMove );
+    checkForWin();
+    if (gameOver) { // TODO refactor this bit same as above
+      $('.player-console>p').text(`GAME OVER - "${ lastMove.toUpperCase() }" TAKES THE WIN!`);
+      $('.replay').removeClass('hidden');
+      $('.level-up').removeClass('hidden');
+      return;
+    }
+    checkForDraw();
+  };
+
+
+
+  const populateCell = function ( cell ) {
+    if (xTurn) { // put an X
+      $('.xo').eq( cell ).text('x');
+      lastMove = 'x';
+      numCellsFilled ++;
+      xTurn = false;
+    } else { // put a O
+      $('.xo').eq( cell ).text('o');
+      lastMove = 'o';
+      numCellsFilled ++;
+      xTurn = true;
+    }
+    // update last row/cell variables
+    lastRow = ( $('.xo').eq( cell ).parent().parent().index() ) - 1; // -1 to discount game header
+    lastCol = cell % numRows;
   };
 
   const checkForWin = function () {
@@ -142,14 +156,16 @@
     if ( numCellsFilled === numCells ) {
       $('.player-console>p').text("It's a draw");
       $('.replay').removeClass('hidden');
+      return true;
     }
+    // return false; // do i need this? cos return undefined is falsey?
   };
 
   // *********** EVENT HANDLERS *************
 
   const updateListeners = function ( num ) {
     for (let i = 0; i < num; i++) {
-      $('.cell').eq(i).on( 'click', populateCell.bind(null, i) );
+      $('.cell').eq(i).on( 'click', takeTurn.bind(null, i) );
     }
   };
 
