@@ -2,7 +2,7 @@
 
 
 
-// $(document).ready(function () { TODO uncomment when finished TODO turn all this into a game object
+// $(document).ready(function () { TODO uncomment when finished TODO could refactor as a game object
 
 
 
@@ -68,7 +68,7 @@
     populateCell( cellNum );
     checkForWin();
     if (gameOver) {
-      $('.player-console>p').text(`GAME OVER - "${ lastMove.toUpperCase() }" TAKES THE WIN!`);
+      $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
       $('.replay').removeClass('hidden');
       $('.level-up').removeClass('hidden');
       return;
@@ -81,7 +81,7 @@
     populateCell( aiMove );
     checkForWin();
     if (gameOver) { // TODO refactor this bit same as above
-      $('.player-console>p').text(`GAME OVER - "${ lastMove.toUpperCase() }" TAKES THE WIN!`);
+      $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
       $('.replay').removeClass('hidden');
       $('.level-up').removeClass('hidden');
       return;
@@ -163,21 +163,21 @@
 
   // *********** EVENT HANDLERS *************
 
+  // creates listeners for if a game cell is clicked
   const updateListeners = function ( num ) {
     for (let i = 0; i < num; i++) {
       $('.cell').eq(i).on( 'click', takeTurn.bind(null, i) );
     }
   };
 
+  // removes listeners for board upscale process
   const removeListeners = function ( num ) {
     for (let i = 0; i < num; i++) {
       $('.cell').eq(i).off();  // no args = remove all listeners
     }
   };
 
-  // INIT FOR GAMEPLAY
-
-  // if a game cell is clicked
+  // CREATE INITIAL LISTENERS
   updateListeners( numCells );
 
   // if replay button is clicked
@@ -185,6 +185,18 @@
 
   // if level up button is clicked
   $('.level-up').on( 'click', levelUp );
+
+  // if ai toggle is clicked
+  $('.ai-toggle').on( 'click', function () {
+    ai.on === true ? ai.on = false : ai.on = true;  // toggle true/false state
+    if ( true === ai.on ) {
+      $(this).text( 'Toggle AI Off' );
+    } else {
+      $(this).text( 'Toggle AI On' );
+    }
+    $(this).toggleClass('green');
+    console.log(ai.on);
+  } );
 
 
 

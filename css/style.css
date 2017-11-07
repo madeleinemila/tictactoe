@@ -28,10 +28,12 @@ p {
   color: cornsilk;
   padding: 0 10px;
   margin-top: 13px;
+  letter-spacing: 1.5px;
 }
 
 .game-header>p {
   text-align: center;
+  display: inline-block;
 }
 
 button {
@@ -45,6 +47,22 @@ button {
     font-family: 'Lato', sans-serif;
     margin: 0 10px;
 }
+
+button:focus {
+  outline: 0;
+}
+
+
+.ai-toggle {
+  background-color: #c385ce; /*purple*/
+}
+
+.green {
+  background-color: #97d055; /*green*/
+}
+
+
+
 
 .noselect { /* to get rid of ugly highlight if user accidentally dbl clicks */
   -webkit-touch-callout: none; /* iOS Safari */

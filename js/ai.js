@@ -10,6 +10,10 @@
 
 
 const ai = {
+
+  // ai toggle, init to on
+  on: true,
+
   speak: function () {
     console.log( `I'm alive! ALIVE!` );
   },
@@ -17,7 +21,17 @@ const ai = {
 
   choose: function () {
     let choice = -1;
-    // find available cells
+    // if AI (O) has a row with numRows - 1 X's....
+
+    // go in that space
+
+    // if X has a row with numRows - 1 X's....
+
+    // go in that space
+
+
+
+    // else find available cells
     const availCells = [];
     for (let i = 0; i < numCells; i++) {
       if ( ! ($('.xo').eq( i ).text()) ) {   // if there is NOT something in the cell
@@ -29,13 +43,4 @@ const ai = {
     choice = availCells[ seed ];
     return choice;
   }
-
-  
-
 };
-
-
-    // // if cell is used, exit
-    // if ($('.xo').eq( cellNum ).text()) {
-    //   return;
-    // }
