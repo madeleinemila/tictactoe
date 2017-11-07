@@ -11,6 +11,11 @@ html, body {
 	height: 100%; /* for sticky footer & flex boxes */
 }
 
+header {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
 .noselect { /* to get rid of ugly highlight if user accidentally dbl clicks */
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -28,6 +33,7 @@ html, body {
 .game-board {
   width: 640px;
   height: 800px;
+  margin: 0 auto;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

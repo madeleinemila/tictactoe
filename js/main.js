@@ -1,4 +1,8 @@
-$(document).ready(function () {
+
+
+
+
+// $(document).ready(function () { TODO uncomment when finished
 
 
 
@@ -8,10 +12,12 @@ $(document).ready(function () {
   let gameOver = false;
   // variable for draw handling
   let numCellsFilled = 0;
+  // variable for current level
+  let level = 1;
 
   // get number of cells & rows
-  const numCells = $('.xo').length;
-  const numRows = $('.row').length;
+  let numCells = $('.xo').length;
+  let numRows = $('.row').length;
 
   // variables to hold data of last cell clicked, init to -1 so it doesn't apply to any cell
   let lastRow = -1;
@@ -21,6 +27,25 @@ $(document).ready(function () {
 
 
   // ******** FUNCTIONS ************
+  const levelUp = function () {
+    // add an extra <div class="cell noselect"><div class="xo"></div></div> to each <div class="row">
+    const newCell = $('<div class="cell noselect"><div class="xo"></div></div>');
+    $('.row').append( newCell );
+    // duplicate last whole row
+    $('.row:last').clone().insertAfter('.row:last');
+    // now update cell and row numbers
+    numCells = $('.xo').length;
+    numRows = $('.row').length;
+    // *** remove old event listeners ***
+    removeListeners( numCells );
+    // console.log( `numCells ${ numCells } numRows ${ numRows }` );
+    // now add new listeners
+    updateListeners( numCells );
+  };
+
+
+
+
   const restartGame = function () {
     $('.xo').text('');
     gameOver = false;
@@ -34,6 +59,7 @@ $(document).ready(function () {
   };
 
   const populateCell = function ( cellNum ) {
+    console.log( cellNum );
     if (gameOver) {
       return;
     }
@@ -68,7 +94,7 @@ $(document).ready(function () {
   const checkForWin = function () {
     // check row for win
     for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
-      console.log( lastRow, i);
+      // console.log( lastRow, i);
       if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) {
         break;
       }
@@ -117,10 +143,23 @@ $(document).ready(function () {
   };
 
   // *********** EVENT HANDLERS *************
+
+  const updateListeners = function ( num ) {
+    for (let i = 0; i < num; i++) {
+      $('.cell').eq(i).on( 'click', populateCell.bind(null, i) );
+    }
+  };
+
+  const removeListeners = function ( num ) {
+    for (let i = 0; i < num; i++) {
+      $('.cell').eq(i).off();  // no args = remove all listeners
+    }
+  };
+
+  // INIT FOR GAMEPLAY
+
   // if a game cell is clicked
-  for (let i = 0; i < numCells; i++) {
-    $('.cell').eq(i).on( 'click', populateCell.bind(null, i) );
-  }
+  updateListeners( numCells );
 
   // if restart button is clicked
   $('.restart').on( 'click', restartGame );
@@ -149,4 +188,4 @@ $(document).ready(function () {
 
 
 
-});  // end document ready
+// });  // end document ready
