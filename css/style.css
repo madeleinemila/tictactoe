@@ -79,7 +79,8 @@ button:focus {
 }
 
 .game-board {
-  background-image: url('http://freshimports.org/wp-content/uploads/2016/04/background-horizontal-dark-wood.jpeg');
+  background-color: #919191;
+  background-image: url( '../images/wood_640.jpg' );
   background-size: contain;
 
   width: 640px;
@@ -91,7 +92,6 @@ button:focus {
   display: -o-flexbox;
   display: -webkit-flex;
   display: flex;
-  background-color: #afafaf;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -ms-flex-direction: column;
@@ -121,9 +121,9 @@ button:focus {
 }
 
 .cell {
-  /*background-color: #cacaca;*/
-    background-image: url('http://www.faicoach.com/wp-content/uploads/2013/07/ivory-off-white-paper-texture.jpg');
-    background-size: cover;
+  background-color: #cacaca;
+  background-image: url( '../images/paper_214.jpg' );
+  background-size: cover;
   -webkit-flex: 4;
   -moz-flex: 4;
   -ms-flex: 4;
