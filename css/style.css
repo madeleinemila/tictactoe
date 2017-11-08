@@ -79,7 +79,7 @@ button:focus {
 }
 
 .game-board {
-  background-color: #39383C; /* dark like wood */
+  background-color: #403A3F; /* dark like wood, fallback */
   /*background-image: url( '../images/wood_820h.jpg' );*/
   background-image: url( '../images/wood_900x700.jpg' );
   /*background-image: url( 'http://freshimports.org/wp-content/uploads/2016/04/background-horizontal-dark-wood.jpeg' );*/
@@ -88,7 +88,7 @@ button:focus {
   width: 640px;
   height: 800px;
   margin: 0 auto;
-	/*padding: 10px; TODO maybe add in and fix other alignment stuff */  
+	/*padding: 10px; TODO maybe add in and fix other alignment stuff */
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
