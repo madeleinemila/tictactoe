@@ -99,9 +99,13 @@
       numCellsFilled ++;
       xTurn = false;
     } else { // put a O
-      $('.xo').eq( cell ).fadeOut( function () {
-        $('.xo').eq( cell ).text('o').fadeIn( 1000 ); // had to put inside fadeout function to work
-      } );
+      if ( true === ai.on ) {
+        $('.xo').eq( cell ).fadeOut( function () {
+          $('.xo').eq( cell ).text('o').fadeIn( 1000 ); // had to put inside fadeout function to work
+        } );
+      } else {
+        $('.xo').eq( cell ).text('o')
+      }
       lastMove = 'o';
       numCellsFilled ++;
       xTurn = true;

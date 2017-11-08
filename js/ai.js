@@ -30,6 +30,15 @@ const ai = {
     // go in that space
 
 
+    // poll all cells with o's
+    const oCells = [];
+    for (let i = 0; i < numCells; i++) {
+      if ( 'o' === $('.xo').eq( i ).text() ) {
+        console.log(i);
+      }
+    }
+
+
 
     // else find available cells
     const availCells = [];
