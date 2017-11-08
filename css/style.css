@@ -79,7 +79,7 @@ button:focus {
 }
 
 .game-board {
-  background-color: #403A3F; /* dark like wood, fallback */
+  background-color: #403A3F; /* dark like wood */
   /*background-image: url( '../images/wood_820h.jpg' );*/
   background-image: url( '../images/wood_900x700.jpg' );
   /*background-image: url( 'http://freshimports.org/wp-content/uploads/2016/04/background-horizontal-dark-wood.jpeg' );*/
@@ -124,7 +124,7 @@ button:focus {
 }
 
 .cell {
-  background-color: #dfdfdf; /* light like paper */
+  background-color: #f4e2e2; /* fallback */
   background-image: url( '../images/paper_214.jpg' );
   background-size: cover;
   -webkit-flex: 4;
