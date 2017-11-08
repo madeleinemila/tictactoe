@@ -79,13 +79,14 @@ button:focus {
 }
 
 .game-board {
-  background-color: #919191;
-  background-image: url( '../images/wood_640.jpg' );
+  background-color: #39383C; /* dark like wood */
+  background-image: url( '../images/wood_820h.jpg' );
   background-size: contain;
 
   width: 640px;
   height: 800px;
   margin: 0 auto;
+	padding: 10px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -121,7 +122,7 @@ button:focus {
 }
 
 .cell {
-  background-color: #cacaca;
+  background-color: #dfdfdf; /* light like paper */
   background-image: url( '../images/paper_214.jpg' );
   background-size: cover;
   -webkit-flex: 4;
