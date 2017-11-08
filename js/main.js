@@ -51,6 +51,7 @@
 
   const restartGame = function () {
     $('.xo').text('');
+    $('.xo').removeClass('win');
     gameOver = false;
     xTurn = true;
     $('.player-console>p').text('');
@@ -111,12 +112,15 @@
   const checkForWin = function () {
     // check row for win
     for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
-      // console.log( lastRow, i);
-      if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) {
+      if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) { // i.e. if anything cell in row in question does not match last move...
         break;
       }
-      if (i === numRows - 1) { // i.e. we've finished iterating but before we exit
+      if (i === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be game over so before we exit
         gameOver = true;
+        // change color of winning combo
+        for (let i = 0; i <numRows; i++) {
+          $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).addClass('win');
+        }
         return;
       }
     }
@@ -127,6 +131,10 @@
       }
       if (i === numRows - 1) {
         gameOver = true;
+        // change color of winning combo
+        for (let i = 0; i <numRows; i++) {
+          $(`.row:eq(${ i }) .xo:eq(${ lastCol })`).addClass('win');
+        }
         return;
       }
     }
@@ -137,6 +145,10 @@
       }
       if (i === numRows - 1) {
         gameOver = true;
+        // change color of winning combo
+        for (let i = 0; i <numRows; i++) {
+          $(`.row:eq(${ i }) .xo:eq(${ i })`).addClass('win');
+        }
         return;
       }
     }
@@ -147,6 +159,10 @@
         }
       if (i === numRows - 1) {
         gameOver = true;
+        // change color of winning combo
+        for (let i = 0; i <numRows; i++) {
+          $(`.row:eq(${ i }) .xo:eq(${ numRows - 1 - i })`).addClass('win');
+        }
         return;
       }
     }

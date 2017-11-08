@@ -61,6 +61,10 @@ button:focus {
   background-color: #97d055; /*green*/
 }
 
+.win {
+	color: #ff4555; /* reddish pink */
+}
+
 #game-mode {
 	color: #c385ce; /*purple*/
 }
