@@ -99,7 +99,9 @@
       numCellsFilled ++;
       xTurn = false;
     } else { // put a O
-      $('.xo').eq( cell ).text('o');
+      $('.xo').eq( cell ).fadeOut( function () {
+        $('.xo').eq( cell ).text('o').fadeIn( 1000 ); // had to put inside fadeout function to work
+      } );
       lastMove = 'o';
       numCellsFilled ++;
       xTurn = true;
