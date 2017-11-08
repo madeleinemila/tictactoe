@@ -65,8 +65,8 @@
     if ($('.xo').eq( cellNum ).text()) { // if cell is taken
       return;
     }
-    // hide AI toggle since game has commenced
-    $('.ai-toggle').addClass('hidden');
+    $('.ai-toggle').fadeOut( 350 );
+
     // gameplay start
     populateCell( cellNum );
     checkForWin();
@@ -154,16 +154,26 @@
 
   const renderGameOver = function () {
       $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
+      // show buttons for next game
+      if ( true === ai.on ) {
+        if ( 'x' === lastMove ) { // i.e. if human won
+          $('.level-up').removeClass('hidden'); // show level up button
+        }
+      }
+      if ( false === ai.on) {     // or if 2 humans playing
+        $('.level-up').removeClass('hidden'); // show level up button
+      }
       $('.replay').removeClass('hidden');
-      $('.level-up').removeClass('hidden');
-      $('.ai-toggle').removeClass('hidden');
+      // show AI toggle
+      $('.ai-toggle').fadeIn( 1000 );
   };
 
   const checkForDraw = function () {
     if ( numCellsFilled === numCells ) {
       $('.player-console>p').text("It's a draw");
+      $('.level-up').removeClass('hidden'); // show level up button
       $('.replay').removeClass('hidden');
-      $('.ai-toggle').removeClass('hidden');
+      $('.ai-toggle').fadeIn( 1000 );
       return true;
     }
     // return false; // do i need this? cos return undefined is falsey?
@@ -199,11 +209,12 @@
     ai.on === true ? ai.on = false : ai.on = true;  // toggle true/false state
     if ( true === ai.on ) {
       $(this).text( 'Toggle AI Off' );
+      $('#game-mode').html('&nbsp;&nbsp;AI MODE');
     } else {
       $(this).text( 'Toggle AI On' );
+      $('#game-mode').text('');
     }
     $(this).toggleClass('green');
-    console.log(ai.on);
   } );
 
 
