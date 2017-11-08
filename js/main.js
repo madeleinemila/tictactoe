@@ -22,6 +22,9 @@ let lastRow = -1;
 let lastCol = -1;
 let lastMove = '';
 
+// flag for alternating final level messages
+let altMsg = 0;
+
 
 
 // ******** FUNCTIONS **********************************************************
@@ -45,6 +48,10 @@ const levelUp = function () {
   $('.level-up').addClass('hidden');
   level ++;
   $('#level-num').text( level );
+  // final round msg for level 10
+  if ( 10 === level ) {
+    $('#level-num').text( `${ level } | FINAL ROUND` );
+  }
   // ** adjust X O vert alignment for smaller boxes
   if ( 3 < level ) {
     $('.xo').css( { 'margin-top': '-10px', 'font-size': '60px' } );
@@ -55,7 +62,6 @@ const levelUp = function () {
   if ( 8 < level) {
     $('.xo').css( 'font-size', '40px' );
   } // ** end adjust
-
 };
 
 
@@ -81,7 +87,6 @@ const takeTurn = function ( cellNum ) {
     return;
   }
   $('.ai-toggle').fadeOut( 350 );
-
   // gameplay start
   populateCell( cellNum );
   checkForWin();
@@ -193,6 +198,19 @@ const checkForWin = function () {
 
 
 const renderGameOver = function () {
+    if ( 10 === level ) {
+      $('.player-console>p').css( 'font-size', '15px' );
+      if ( altMsg % 2 === 0 ) {
+        $('.player-console>p').text(`Do you really need more tic tac toe in your life now?`);
+      } else {
+        $('.player-console>p').text(`So much tic tac toe, so little time.`);
+      }
+      altMsg++;
+      $('.replay').removeClass('hidden');
+      $('.ai-toggle').fadeIn( 1000 );
+      return;
+    }
+    // show winner console message
     $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
     // show buttons for next game
     if ( true === ai.on ) {
