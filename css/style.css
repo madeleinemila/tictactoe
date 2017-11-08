@@ -94,7 +94,7 @@ button:focus {
   }
 
   40%, 60% {
-    transform: translate3d(4px, 0, 0);
+    transform: translate3d(6px, 0, 0);
   }
 }
 /* END WIGGLE */
