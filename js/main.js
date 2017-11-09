@@ -65,8 +65,6 @@ const levelUp = function () {
 };
 
 
-
-
 const restartGame = function () {
   $('.xo').text('');
   $('.xo').removeClass('win');
@@ -77,7 +75,6 @@ const restartGame = function () {
   numCellsFilled = 0;
   $('.level-up').addClass('hidden');
 };
-
 
 
 const takeTurn = function ( cellNum ) {
@@ -101,7 +98,6 @@ const takeTurn = function ( cellNum ) {
   const aiMove = ai.choose();
   populateCell( aiMove ); // <<<<<< ** check for win and draw is INSIDE this **
 };
-
 
 
 const populateCell = function ( cell ) {
@@ -195,7 +191,6 @@ const checkForWin = function () {
 };
 
 
-
 const renderGameOver = function () {
     if ( 10 === level ) {
       $('.player-console>p').css( 'font-size', '15px' );
@@ -226,7 +221,6 @@ const renderGameOver = function () {
 };
 
 
-
 const checkForDraw = function () {
   if ( numCellsFilled === numCells ) {
     $('.player-console>p').text("It's a draw");
@@ -235,4 +229,107 @@ const checkForDraw = function () {
     $('.ai-toggle').fadeIn( 1000 );
     return true;
   } // don't need anything else bc undefined is falsey
+  checkForStalemate();
 };
+
+
+const checkForStalemate = function () {
+
+    let rowsStale = [];
+    let colsStale = [];
+    let negDiagStale;
+    let posDiagStale;
+
+
+    // check rows
+    for (let r = 0; r < numRows; r++) {
+      let xs = [];
+      let os = [];
+      for (let i = 0; i < numRows; i++) {
+        let cn = numRows * r + i; // cell num
+        if ( ai.cellIsX( cn ) ) {
+          xs.push( i );
+        }
+        if ( ai.cellIsO( cn ) ) {
+          os.push( i );
+        }
+      }
+      if ( xs.length > 0 && os.length > 0 ) {
+        rowsStale[r] = true;
+        console.log(`rowsStale[${r}]` + rowsStale[r]);
+      }
+    }
+
+    // check cols
+    for (let cl = 0; cl < numRows; cl++) {
+      let xs = [];
+      let os = [];
+      for (let i = 0; i < numRows; i++) {
+        let cn = numRows * i + cl; // cell num
+        if ( ai.cellIsX( cn ) ) {
+          xs.push( i );
+        }
+        if ( ai.cellIsO( cn ) ) {
+          os.push( i );
+        }
+      }
+      if ( xs.length > 0 && os.length > 0 ) {
+        colsStale[cl] = true;
+        console.log(`colsStale[${cl}]` + colsStale[cl]);
+      }
+    }
+
+
+    // check NEG DIAG
+    let xs = [];
+    let os = [];
+    for (let d = 0; d < numRows; d++) {
+      let cn = (numRows + 1) * d; // cell num
+      if ( ai.cellIsX( cn ) ) {
+        xs.push( d );
+      }
+      if ( ai.cellIsO( cn ) ) {
+        os.push( d );
+      }
+    }
+    if ( xs.length > 0 && os.length > 0 ) {
+      negDiagStale = true;
+      console.log(`negDiagStale ` + negDiagStale);
+    }
+    // check POS DIAG
+    xs = [];
+    os = [];
+    for (let d = 0; d < numRows; d++) {
+      let cn = ( d + 1 ) * ( numRows - 1 ); // cell num
+      if ( ai.cellIsX( cn ) ) {
+        xs.push( d );
+      }
+      if ( ai.cellIsO( cn ) ) {
+        os.push( d );
+      }
+    }
+    if ( xs.length > 0 && os.length > 0 ) {
+      posDiagStale = true;
+      console.log(`posDiagStale ` + posDiagStale);
+    }
+
+    // check if all rows, cols and diags are true for stale
+    const isTrue = function (x) {
+      if (x === true) return true;
+    };
+    if ( rowsStale.every( isTrue ) &&  colsStale.every( isTrue ) && negDiagStale === true && posDiagStale === true ) {
+      console.log( `Stalemate reached` );
+      return true;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+//**
