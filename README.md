@@ -1,8 +1,9 @@
 
 ## Tic Tac Toe
 
-###### It's Tic Tac Toe.
-###### BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!WOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+It's Tic Tac Toe.
+
+BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!WOW!!!!!!!!!!!!!!!!!!!!!!
 
 
 
