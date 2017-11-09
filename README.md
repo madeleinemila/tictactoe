@@ -1,24 +1,16 @@
 
-##########   ##      ####       ##########     ###          ####       ##########    ###     ########
-    ##       ##    ##    ##         ##        ## ##       ##    ##         ##      ##   ##   ##
-    ##       ##  ##                 ##       ##   ##     ##                ##     ##     ##  ##
-    ##       ##  ##                 ##      ##     ##    ##                ##     ##     ##  ##
-    ##       ##  ##                 ##     ###########   ##                ##     ##     ##  #####
-    ##       ##    ##    ##         ##     ##       ##    ##    ##         ##      ##   ##   ##
-    ##       ##      ####           ##     ##       ##      ####           ##        ###     ########
+## It's Tic Tac Toe.
+
+## BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!WOW!!!!^
 
 
 
 
-It's Tic Tac Toe.
 
-BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!WOW!!!!^
-
-*^Actually exactly like you've seen it before.*
-
-
-
-Built with HTML, CSS & Javascript inc. jQuery.
+Built with:
+- HTML
+- CSS
+- Javascript inc. jQuery.
 
 
 
@@ -27,7 +19,8 @@ Built with HTML, CSS & Javascript inc. jQuery.
 *************************************
 
 Download this repository, then open index.html in a web browser.
-Or, you can play the game online at https://madeleinemila.github.io/tictactoe/.
+
+Or, you can play the game online at [my GitHub Page](https://madeleinemila.github.io/tictactoe/).
 
 
 *************************************
@@ -50,3 +43,13 @@ IN TWO PLAYER MODE:
 
 There are a total of 10 levels to startle and amaze.
 Enjoy your journey.
+
+
+
+
+
+
+
+```html
+<sub><sup>*^Actually exactly like you've seen it before.*</sup></sub>
+```
