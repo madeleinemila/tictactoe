@@ -83,8 +83,42 @@ const ai = {
               $('.xo').eq( i ).removeClass('hidden');
               return blockCell;
             }
-          } // end J LOOP
+          } // end iterating through cells (j loop)
         } // end iterating through ROWS (r loop)
+
+
+
+        // check COLUMN for win
+        for (let cl = 0; cl < numRows; cl++) {
+          console.log( `Examining col number ${cl} and i/fake x is ${i}` );
+          for (let j = 0; j < numRows; j++) {
+            let cn = numRows * j + cl; // cell num
+            console.log( `Examining cell ${ cn } and i/fake x is ${i}` );
+            // debugger;
+            console.log( `First condition - is an O:  ${this.cellIsO( cn )}` );
+            console.log( `Second condition - is blank:  ${this.cellIsFree( cn )}` );
+            console.log( `NOW IN CELL i ${i} BEFORE CHECK: ` + $('.xo').eq( i ).text() );
+            console.log( `NOW IN CELL cn ${cn} BEFORE CHECK: ` + $('.xo').eq( cn ).text() );
+            if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
+              console.log( `Not an impending win combo` );
+              break; // break out of J LOOP, start to check a new row
+            }
+            if (j === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
+              blockCell = i;
+              console.log( `blockCell = ${blockCell}` );
+              // remove simulation
+              $('.xo').eq( i ).text('');
+              $('.xo').eq( i ).removeClass('hidden');
+              return blockCell;
+            }
+          } // end iterating through cells (j loop)
+        } // end iterating through COLUMNS (cl loop)
+
+
+
+
+
+
         // if we haven't returned a blockCell, then remove simulation
         $('.xo').eq( i ).text('');
         console.log( `Simulated X removed` );
@@ -92,42 +126,10 @@ const ai = {
 
 
 
-        // // check COLUMN for win
-        // for (let i = 0; i < numRows; i++) {
-        //   if ( $(`.row:eq(${ i }) .xo:eq(${ lastCol })`).text() !== lastMove ) {
-        //     break;
-        //   }
-        //   if (i === numRows - 1) {
-        //     // DO SOMETHING
-        //     return;
-        //   }
-        // }
-        // // check NEGATIVE DIAG for win
-        // for (let i = 0; i < numRows; i++) {
-        //   if ( $(`.row:eq(${ i }) .xo:eq(${ i })`).text() !== lastMove ) {
-        //     break;
-        //   }
-        //   if (i === numRows - 1) {
-        //     // DO SOMETHING
-        //     return;
-        //   }
-        // }
-        // // check POSITIVE DIAG for win
-        // for (let i = 0; i < numRows; i++) {
-        //     if ( $(`.row:eq(${ i }) .xo:eq(${ numRows - 1 - i })`).text() !== lastMove ) {
-        //       break;
-        //     }
-        //   if (i === numRows - 1) {
-        //     // DO SOMETHING
-        //     return;
-        //   }
-        // }
 
 
 
-      } // end for each cell number
-
-
+      } // end iterating through simulated X positions (i loop)
   },
 
 
@@ -136,146 +138,17 @@ const ai = {
 
   choose: function () {
     let choice = -1;
-    let possChoice = [];
-    let possFreeChoice = [];
-    // let xPresent = false;
-
-    // let holdingBay = {
-    //   o: [],
-    //   x: [],
-    //   empty: []
-    // };
-    // if AI (O) has a row with numRows - 1 X's....
-
-    // go in that space
-
-    // if X has a row with numRows - 1 X's....
-
-    // go in that space
-
-
-    // poll all cells with o's
-    // const oCells = [];
-    // for (let i = 0; i < numCells; i++) {
-    //   if ( 'o' === $('.xo').eq( i ).text() ) {
-    //     console.log(i);
-    //   }
-    // }
-
-
-
-    // GET STATUS OF ALL CELLS ON BOARD
-    // for (let i = 0; i < numRows; i++) {
-    //   for (let j = 0; j < numRows; j++) {
-    //     switch ( $(`.row:eq( ${ i } ) .xo:eq(${ j })`).text() ) {
-    //       case 'o':
-    //         holdingBay.o.push( numRows * i + j );
-    //         break;
-    //       case 'x':
-    //         holdingBay.x.push( numRows * i + j );
-    //         break;
-    //       default:
-    //         holdingBay.empty.push( numRows * i + j );
-    //     }
-    //   }
-    // }
+    // let possChoice = [];
+    // let possFreeChoice = [];
 
 
     if ( 2 < numCellsFilled ) { // if not the first turn
-
-      // for row 0
-      // for (let i = 0; i < numRows; i++) {
-      //   let cellValue = $(`.row:eq(${ r }) .xo:eq(${ i })`).text();
-      //   if ( 'x' === cellValue ) {
-      //
-      //   }
-      // }
-
-
       choice = this.checkForPossWin();
       console.log( `Choice after poss win f call: ${choice}` );
       if ( choice !== undefined ) return choice;
+      }
 
-
-
-
-
-      } // end if 2 < numCellsFilled
-
-
-      // if ( possChoice ) {
-      //   choice = possChoice[ 0 ];
-      //   console.log(`AI thinks this one: ${choice}`);
-      //   return choice;
-      // }
-
-
-
-      // second attempt
-      // for (let r = 0; r < numRows; r++) {
-      //     for (let i = 0; i < numRows; i++) {
-      //       let cellValue = $(`.row:eq(${ r }) .xo:eq(${ i })`).text();
-      //       console.log( `r ${r} i ${i} cellValue ${cellValue} ` );
-      //       if (cellValue === 'x') {
-      //         console.log( `Row ${ r } is a bad idea` );
-      //         possChoice = []; // so remove all the other poss places that you stored
-      //         break;
-      //       }
-      //       if (cellValue === '' || cellValue === 'o') {
-      //         let cellNumber = numRows * r + i;
-      //         console.log(` poss choice here, o or blank ${cellNumber}`);
-      //         possChoice.push( cellNumber );
-      //         console.log( 'Poss choices: ' + possChoice );
-      //         if ( possChoice.length === numRows ) {
-      //           possFreeChoice = possChoice.filter( this.cellIsFree );
-      //           console.log( `possFreeChoice s = ${ possFreeChoice }` );
-      //           return possFreeChoice[ Math.floor( Math.random() * possFreeChoice.length ) ];
-      //         }
-      //       }
-      //     }
-      //   }
-
-
-
-
-
-
-
-
-
-// first attempt
-      // for (let r = 0; r < numRows; r++) {
-      //     for (let i = 0; i < numRows; i++) {
-      //       let cellValue = $(`.row:eq(${ r }) .xo:eq(${ i })`).text();
-      //       console.log( `r ${r} i ${i} cellValue ${cellValue} ` );
-      //       if (cellValue === 'x') {
-      //         console.log( `Row ${ r } is a bad idea` );
-      //         possChoice = []; // so remove all the other poss places that you stored
-      //         break;
-      //       }
-      //       if (cellValue === 'o') continue;
-      //       if (cellValue === '') {
-      //         let cellNumber = numRows * r + i;
-      //         console.log(` poss choice here ${cellNumber}`);
-      //         possChoice.push( cellNumber );
-      //         console.log( 'Poss choices: ' + possChoice );
-      //       }
-      //     }
-      //   }
-      // if ( possChoice ) {
-      //   choice = possChoice[ 0 ];
-      //   console.log(`AI thinks this one: ${choice}`);
-      //   return choice;
-      // }
-
-
-
-
-
-
-
-
-    // favour centre-ish squares
+    // or go centre-ish square first
     let centre;
     if ( numRows % 2 === 1 ) {
       centre = Math.floor( numCells / 2 );
@@ -287,47 +160,7 @@ const ai = {
       return choice;
     }
 
-
-
-
-
-
-
-
-      // for (let i = 0; i < numRows; i++) {
-      //   if ( $(`.row:eq(${ 0 }) .xo:eq(${ i })`).text() === 'x' ) {
-      //     console.log(`cell ${i} is an x`);
-      //     break;
-      //   }
-      // }
-
-
-      //   if ( $(`.row:eq(${ 0 }) .xo:eq(${ i })`).text() === 'o' ) continue;
-      //   if ( $(`.row:eq(${ 0 }) .xo:eq(${ i })`).text() === '' ) {
-      //     choice = numRows * 0 + i; // i.e. cell num
-      //     return choice;
-      //   }
-      // }
-
-
-    // check for COLS with just o's
-    // for (let i = 0; i < numRows; i++) {
-    //   for (let j = 0; j < numRows; j++) {  // numRows works for number of cols too as game board is square
-    //     if ( $(`.row:eq(${ j }) .xo:eq(${ j })`).text() === 'x' ) {
-    //       break;
-    //     }
-    //     if ( $(`.row:eq(${ j }) .xo:eq(${ i })`).text() === 'o' ) continue;
-    //     if ( $(`.row:eq(${ j }) .xo:eq(${ i })`).text() === '' ) {
-    //       choice = numRows * i + j; // i.e. cell num
-    //       console.log(choice);
-    //       return choice;
-    //     }
-    //   }
-    // }
-
-
-
-    // else find available cells
+    // or find available cells
     const availCells = [];
     for (let i = 0; i < numCells; i++) {
       if ( ! ($('.xo').eq( i ).text()) ) {   // if there is NOT something in the cell

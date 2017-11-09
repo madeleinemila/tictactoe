@@ -46,6 +46,7 @@ button {
     font-size: 16px;
     font-family: 'Lato', sans-serif;
     margin: 0 10px;
+    width: 156px; /* set to size that fits longest text ('Toggle AI Off') */
 }
 
 button:focus {
