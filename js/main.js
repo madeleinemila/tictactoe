@@ -99,14 +99,7 @@ const takeTurn = function ( cellNum ) {
   if ( false === ai.on ) return;
   // AI turn
   const aiMove = ai.choose();
-  console.log( aiMove );
-  populateCell( aiMove );
-  checkForWin();
-  if (gameOver) {
-    renderGameOver();
-    return;
-  }
-  checkForDraw();
+  populateCell( aiMove ); // <<<<<< ** check for win and draw is INSIDE this **
 };
 
 
@@ -119,8 +112,15 @@ const populateCell = function ( cell ) {
     xTurn = false;
   } else { // put a O
     if ( true === ai.on ) {
-      $('.xo').eq( cell ).fadeOut( function () {
-        $('.xo').eq( cell ).text('o').fadeIn( 500 ); // had to put inside fadeout function to work
+      $('.xo').eq( cell ).fadeOut( 10, function () {
+        $('.xo').eq( cell ).text('o');  // change the text
+        $('.xo').eq( cell ).fadeIn( 400 );
+        checkForWin();      // <<<
+        if (gameOver) {     // <<<
+          renderGameOver(); // <<<
+          return;           // <<<
+        }                   // <<<
+        checkForDraw();     // <<<
       } );
     } else {
       $('.xo').eq( cell ).text('o')
@@ -133,7 +133,6 @@ const populateCell = function ( cell ) {
   lastRow = ( $('.xo').eq( cell ).parent().parent().index() ) - 1; // -1 to discount game header
   lastCol = cell % numRows;
 };
-
 
 
 const checkForWin = function () {
