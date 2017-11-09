@@ -30,9 +30,8 @@ let altMsg = 0;
 // ******** FUNCTIONS **********************************************************
 
 
-
 const levelUp = function () {
-  // add an extra CELL with an XO dive
+  // add an extra CELL with an XO div
   const newCell = $('<div class="cell noselect"><div class="xo"></div></div>');
   $('.row').append( newCell );
   // duplicate last whole row
@@ -42,9 +41,9 @@ const levelUp = function () {
   numRows = $('.row').length;
   // *** remove old event listeners *********
   removeListeners( numCells );
-  // now add new listeners
-  updateListeners( numCells );
+  // now restart game
   restartGame();
+  // update browser ready for new game
   $('.level-up').addClass('hidden');
   level ++;
   $('#level-num').text( level );
@@ -92,29 +91,31 @@ const takeTurn = function ( cellNum ) {
     renderGameWon();
     return;
   }
-  checkForDraw();
+  // checkForDraw();
   if ( checkForDraw() === true ) return;
   if ( false === ai.on ) return;
   // AI turn
   const aiMove = ai.choose();
-  populateCell( aiMove ); // <<<<<< ** check for win and draw is INSIDE this **
+  populateCell( aiMove ); // <<<<<< ** check for win and draw after ai move is INSIDE populateCell **
 };
 
 
 const populateCell = function ( cell ) {
-  if (xTurn) { // put an X
+  if (xTurn) {
+    // put an X
     $('.xo').eq( cell ).text('x');
     lastMove = 'x';
     numCellsFilled ++;
     xTurn = false;
-  } else { // put a O
+  } else {
+    // put an O
     if ( true === ai.on ) {
       $('.xo').eq( cell ).fadeOut( 10, function () {
-        $('.xo').eq( cell ).text('o');  // change the text
+        $('.xo').eq( cell ).text('o');
         $('.xo').eq( cell ).fadeIn( 400 );
-        checkForWin();      // <<<
+        checkForWin();      // <<<  these put inside fadeOut for timing purposes
         if (gameOver) {     // <<<
-          renderGameWon(); // <<<
+          renderGameWon();  // <<<
           return;           // <<<
         }                   // <<<
         checkForDraw();     // <<<
@@ -135,7 +136,7 @@ const populateCell = function ( cell ) {
 const checkForWin = function () {
   // check ROW for win
   for (let i = 0; i < numRows; i++) {  // numRows works for number of cols too as game board is square
-    if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) { // i.e. if anything cell in row in question does not match last move...
+    if ( $(`.row:eq(${ lastRow }) .xo:eq(${ i })`).text() !== lastMove ) { // i.e. if value of cell in row in question does not match last move...
       break;
     }
     if (i === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be game over so before we exit
@@ -193,10 +194,11 @@ const checkForWin = function () {
 
 
 const renderGameWon = function () {
+    // exception: different win messages for final level
     if ( 10 === level ) {
       $('.player-console>p').css( 'font-size', '15px' );
       if ( altMsg % 2 === 0 ) {
-        $('.player-console>p').text(`Do you really need more tic tac toe in your life now?`);
+        $('.player-console>p').text(`Do you need more tic tac toe in your life now?`);
       } else {
         $('.player-console>p').text(`So much tic tac toe, so little time.`);
       }
@@ -205,7 +207,7 @@ const renderGameWon = function () {
       $('.ai-toggle').fadeIn( 1000 );
       return;
     }
-    // show winner console message
+    // main: show winner console message
     $('.player-console>p').text(`${ lastMove.toUpperCase() } TAKES THE WIN!`);
     // show buttons for next game
     if ( true === ai.on ) {
@@ -225,17 +227,20 @@ const renderGameWon = function () {
 const checkForDraw = function () {
   if ( numCellsFilled === numCells ) {
     $('.player-console>p').text("It's a draw");
-    $('.level-up').removeClass('hidden'); // show level up button
+    $('.level-up').removeClass('hidden');
     $('.replay').removeClass('hidden');
     $('.ai-toggle').fadeIn( 1000 );
     return true;
-  } // don't need anything else bc undefined is falsey
+  }
   // IF STALEMATE REACHED
   if ( checkForStalemate() ) {
-    // stop further moves being made
+    // stop further moves being made...
     removeListeners( numCells );
+    // ...and update player's screen
     $('.player-console>p').text("Stalemate");
-    $('.level-up').removeClass('hidden'); // show level up button
+    if ( 10 > level ) {
+      $('.level-up').removeClass('hidden');
+    }
     $('.replay').removeClass('hidden');
     $('.ai-toggle').fadeIn( 1000 );
     return true;
@@ -244,13 +249,10 @@ const checkForDraw = function () {
 
 
 const checkForStalemate = function () {
-
     let rowsStale = new Array( numRows ).fill( false );
     let colsStale = new Array( numRows ).fill( false );
     let negDiagStale = false;
     let posDiagStale = false;
-
-
     // check rows
     for (let r = 0; r < numRows; r++) {
       let xs = [];
@@ -266,10 +268,8 @@ const checkForStalemate = function () {
       }
       if ( xs.length > 0 && os.length > 0 ) {
         rowsStale[r] = true;
-        console.log(`rowsStale[${r}]` + rowsStale[r]);
       }
     }
-
     // check cols
     for (let cl = 0; cl < numRows; cl++) {
       let xs = [];
@@ -285,11 +285,8 @@ const checkForStalemate = function () {
       }
       if ( xs.length > 0 && os.length > 0 ) {
         colsStale[cl] = true;
-        console.log(`colsStale[${cl}]` + colsStale[cl]);
       }
     }
-
-
     // check NEG DIAG
     let xs = [];
     let os = [];
@@ -304,7 +301,6 @@ const checkForStalemate = function () {
     }
     if ( xs.length > 0 && os.length > 0 ) {
       negDiagStale = true;
-      console.log(`negDiagStale ` + negDiagStale);
     }
     // check POS DIAG
     xs = [];
@@ -320,17 +316,12 @@ const checkForStalemate = function () {
     }
     if ( xs.length > 0 && os.length > 0 ) {
       posDiagStale = true;
-      console.log(`posDiagStale ` + posDiagStale);
     }
-
     // check if all rows, cols and diags are true for stale
     const isTrue = function (x) {
       return x === true;
     };
-    console.log( `rowsStale.every( isTrue ) ${rowsStale.every( isTrue )}` );
-    console.log( `colsStale.every( isTrue ) ${colsStale.every( isTrue )}` );
     if ( rowsStale.every( isTrue ) &&  colsStale.every( isTrue ) && negDiagStale === true && posDiagStale === true ) {
-      console.log( `Stalemate reached` );
       return true;
     }
 };

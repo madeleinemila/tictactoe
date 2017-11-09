@@ -1,4 +1,9 @@
+
+
 // *********** EVENT HANDLERS *************
+
+
+// *** Functions ***
 
 // creates listeners for if a game cell is clicked
 const updateListeners = function ( num ) {
@@ -7,12 +12,14 @@ const updateListeners = function ( num ) {
   }
 };
 
-// removes listeners for board upscale process
+// removes listeners, to disable clicking or for board upscale process
 const removeListeners = function ( num ) {
   for (let i = 0; i < num; i++) {
     $('.cell').eq(i).off();  // no args = remove all listeners
   }
 };
+
+// *************
 
 // CREATE INITIAL LISTENERS
 updateListeners( numCells );

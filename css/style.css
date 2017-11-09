@@ -8,7 +8,7 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	height: 100%; /* for sticky footer & flex boxes */
+	height: 100%;
 }
 
 header {
@@ -63,7 +63,7 @@ button:focus {
 }
 
 .win {
-	color: #ff4555; /* reddish pink */
+	color: #ff4555; /* reddish */
 }
 
 #game-mode {
@@ -121,16 +121,13 @@ button:focus {
 }
 
 .game-board {
-  background-color: #403A3F; /* dark like wood */
-  /*background-image: url( '../images/wood_820h.jpg' );*/
+  background-color: #403A3F; /* fallback/load colour */
   background-image: url( '../images/wood_900x700_vsml.jpg' );
-  /*background-image: url( 'http://freshimports.org/wp-content/uploads/2016/04/background-horizontal-dark-wood.jpeg' );*/
   background-size: 100%;
-
   width: 640px;
   height: 800px;
   margin: 0 auto;
-	/*padding: 10px; TODO maybe add in and fix other alignment stuff */
+	/*padding: 10px; ----  maybe add in to fix weird chrome zoom line */
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -146,9 +143,6 @@ button:focus {
 
 
 .row {
-  /*background-color: #e5e5e5;*/
-
-
   -webkit-flex: 5;
   -moz-flex: 5;
   -ms-flex: 5;
@@ -167,7 +161,7 @@ button:focus {
 }
 
 .cell {
-  background-color: #f4e2e2; /* fallback */
+  background-color: #f4e2e2; /* fallback/load colour */
   background-image: url( '../images/paper_214x214_sml.jpg' );
   background-size: cover;
   -webkit-flex: 4;
@@ -197,8 +191,6 @@ button:focus {
 .xo {
   font-size: 70px;
   font-family: 'Space Mono', monospace;
-  /*font-weight: bold;
-  font-style: italic;*/
 }
 
 .game-header, .player-console {
@@ -211,10 +203,6 @@ button:focus {
   visibility: hidden;
 }
 
-.replay, .level-up {
-  /*margin: 14px 7px;*/
-}
-
 .float-left {
   display: inline;
   float: left;
@@ -224,5 +212,3 @@ button:focus {
   display: inline;
   float: right;
 }
-
-/*TODO adjust font size and margin-top (to neg value) for larger num of cells*/

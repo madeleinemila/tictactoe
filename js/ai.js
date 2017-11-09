@@ -1,12 +1,6 @@
 
 
-
-// what does the ai need to do
-
-// needs to choose next position
-// and then populate cell
-// then handover next turn
-
+// ----------------------- AI --------------------------------------------------
 
 
 const ai = {
@@ -49,15 +43,12 @@ const ai = {
 
         // if that cell number is taken, skip to next one
         if ( !this.cellIsFree( i ) ) {
-          // console.log( `${i} cell is taken` );
           continue;
         }
 
         // if it's blank, let's run the win tests if that cell is an X
-        console.log( `Cell ${i} value was ${ $('.xo').eq(i).text() }` );
         $('.xo').eq( i ).addClass('hidden');
         $('.xo').eq( i ).text('x');
-        console.log( `Cell ${i} value is now ${ $('.xo').eq(i).text() }` );
 
         // check ROW for win
         for (let r = 0; r < numRows; r++) {
@@ -97,10 +88,7 @@ const ai = {
         // check for NEG DIAG WIN
         for (let d = 0; d < numRows; d++) {
           let cn = (numRows + 1) * d; // cell num
-          // console.log( `Checking cell num ${cn}` );
-          // console.log( `N.B. Value of cell ${cn} is ${ $('.xo').eq(cn).text() }` );
           if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
-            // console.log( `No impending NEG DIAG doom` );
             break; // break out of D LOOP
           }
           if (d === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
@@ -108,7 +96,6 @@ const ai = {
             // remove simulation
             $('.xo').eq( i ).text('');
             $('.xo').eq( i ).removeClass('hidden');
-            // console.log( `Block cell found: ${blockCell}` );
             return blockCell;
           }
         } // end iterating through neg diag
@@ -116,10 +103,7 @@ const ai = {
         // check for POS DIAG WIN
         for (let d = 0; d < numRows; d++) {
           let cn = ( d + 1 ) * ( numRows - 1 ); // cell num
-          console.log( `Checking cell num ${cn}` );
-          console.log( `N.B. Value of cell ${cn} is ${ $('.xo').eq(cn).text() }` );
           if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
-            console.log( `No impending POS DIAG doom` );
             break; // break out of D LOOP
           }
           if (d === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
@@ -127,7 +111,6 @@ const ai = {
             // remove simulation
             $('.xo').eq( i ).text('');
             $('.xo').eq( i ).removeClass('hidden');
-            console.log( `Block cell found: ${blockCell}` );
             return blockCell;
           }
         } // end iterating through pos diag
@@ -135,7 +118,6 @@ const ai = {
 
         // if we haven't returned a blockCell, then remove simulation
         $('.xo').eq( i ).text('');
-        // console.log( `Simulated X removed` );
         $('.xo').eq( i ).removeClass('hidden');
 
       } // end iterating through simulated X positions (i loop)
@@ -150,10 +132,10 @@ const ai = {
     // let possChoice = [];
     // let possFreeChoice = [];
 
-
-    if ( 2 < numCellsFilled ) { // if not the first turn
+    // if not the first turn
+    if ( 2 < numCellsFilled ) {
+      // check if AI can block opponent
       choice = this.checkForPossOpponentWin();
-      // console.log( `Choice after poss win f call: ${choice}` );
       if ( choice !== undefined ) return choice;
       }
 
@@ -169,14 +151,14 @@ const ai = {
       return choice;
     }
 
-    // or find available cells
+    // or find available cells...
     const availCells = [];
     for (let i = 0; i < numCells; i++) {
       if ( ! ($('.xo').eq( i ).text()) ) {   // if there is NOT something in the cell
         availCells.push( i );
       }
     }
-    // and pick one random cell of these avail cells
+    // ...and pick one random cell of these avail cells
     const seed = Math.floor( Math.random() * availCells.length );
     choice = availCells[ seed ];
     return choice;
