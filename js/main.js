@@ -229,16 +229,25 @@ const checkForDraw = function () {
     $('.ai-toggle').fadeIn( 1000 );
     return true;
   } // don't need anything else bc undefined is falsey
-  checkForStalemate();
+  // IF STALEMATE REACHED
+  if ( checkForStalemate() ) {
+    // stop further moves being made
+    removeListeners( numCells );
+    $('.player-console>p').text("Stalemate");
+    $('.level-up').removeClass('hidden'); // show level up button
+    $('.replay').removeClass('hidden');
+    $('.ai-toggle').fadeIn( 1000 );
+    return true;
+  }
 };
 
 
 const checkForStalemate = function () {
 
-    let rowsStale = [];
-    let colsStale = [];
-    let negDiagStale;
-    let posDiagStale;
+    let rowsStale = new Array( numRows ).fill( false );
+    let colsStale = new Array( numRows ).fill( false );
+    let negDiagStale = false;
+    let posDiagStale = false;
 
 
     // check rows
@@ -315,8 +324,10 @@ const checkForStalemate = function () {
 
     // check if all rows, cols and diags are true for stale
     const isTrue = function (x) {
-      if (x === true) return true;
+      return x === true;
     };
+    console.log( `rowsStale.every( isTrue ) ${rowsStale.every( isTrue )}` );
+    console.log( `colsStale.every( isTrue ) ${colsStale.every( isTrue )}` );
     if ( rowsStale.every( isTrue ) &&  colsStale.every( isTrue ) && negDiagStale === true && posDiagStale === true ) {
       console.log( `Stalemate reached` );
       return true;
