@@ -66,6 +66,7 @@ const levelUp = function () {
 
 
 const restartGame = function () {
+  updateListeners( numCells );
   $('.xo').text('');
   $('.xo').removeClass('win');
   gameOver = false;
@@ -88,11 +89,11 @@ const takeTurn = function ( cellNum ) {
   populateCell( cellNum );
   checkForWin();
   if (gameOver) {
-    renderGameOver();
+    renderGameWon();
     return;
   }
   checkForDraw();
-  if ( checkForDraw === true ) return;
+  if ( checkForDraw() === true ) return;
   if ( false === ai.on ) return;
   // AI turn
   const aiMove = ai.choose();
@@ -113,7 +114,7 @@ const populateCell = function ( cell ) {
         $('.xo').eq( cell ).fadeIn( 400 );
         checkForWin();      // <<<
         if (gameOver) {     // <<<
-          renderGameOver(); // <<<
+          renderGameWon(); // <<<
           return;           // <<<
         }                   // <<<
         checkForDraw();     // <<<
@@ -191,7 +192,7 @@ const checkForWin = function () {
 };
 
 
-const renderGameOver = function () {
+const renderGameWon = function () {
     if ( 10 === level ) {
       $('.player-console>p').css( 'font-size', '15px' );
       if ( altMsg % 2 === 0 ) {

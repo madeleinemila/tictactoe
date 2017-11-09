@@ -54,8 +54,10 @@ const ai = {
         }
 
         // if it's blank, let's run the win tests if that cell is an X
+        console.log( `Cell ${i} value was ${ $('.xo').eq(i).text() }` );
         $('.xo').eq( i ).addClass('hidden');
         $('.xo').eq( i ).text('x');
+        console.log( `Cell ${i} value is now ${ $('.xo').eq(i).text() }` );
 
         // check ROW for win
         for (let r = 0; r < numRows; r++) {
@@ -90,6 +92,29 @@ const ai = {
             }
           } // end iterating through cells (j loop)
         } // end iterating through COLUMNS (cl loop)
+
+
+        // check for NEG DIAG WIN
+        for (let d = 0; d < numRows; d++) {
+          let cn = (numRows + 1) * d; // cell num
+          console.log( `Checking cell num ${cn}` );
+          console.log( `N.B. Value of cell ${cn} is ${ $('.xo').eq(cn).text() }` );
+          if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
+            console.log( `No impending NEG DIAG doom` );
+            break; // break out of D LOOP
+          }
+          if (d === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
+            blockCell = i;
+            // remove simulation
+            $('.xo').eq( i ).text('');
+            $('.xo').eq( i ).removeClass('hidden');
+            console.log( `Block cell found: ${blockCell}` );
+            return blockCell;
+          }
+        } // end iterating through neg diag
+
+
+
 
         // if we haven't returned a blockCell, then remove simulation
         $('.xo').eq( i ).text('');
