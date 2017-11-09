@@ -97,10 +97,29 @@ const ai = {
         // check for NEG DIAG WIN
         for (let d = 0; d < numRows; d++) {
           let cn = (numRows + 1) * d; // cell num
+          // console.log( `Checking cell num ${cn}` );
+          // console.log( `N.B. Value of cell ${cn} is ${ $('.xo').eq(cn).text() }` );
+          if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
+            // console.log( `No impending NEG DIAG doom` );
+            break; // break out of D LOOP
+          }
+          if (d === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
+            blockCell = i;
+            // remove simulation
+            $('.xo').eq( i ).text('');
+            $('.xo').eq( i ).removeClass('hidden');
+            // console.log( `Block cell found: ${blockCell}` );
+            return blockCell;
+          }
+        } // end iterating through neg diag
+
+        // check for POS DIAG WIN
+        for (let d = 0; d < numRows; d++) {
+          let cn = ( d + 1 ) * ( numRows - 1 ); // cell num
           console.log( `Checking cell num ${cn}` );
           console.log( `N.B. Value of cell ${cn} is ${ $('.xo').eq(cn).text() }` );
           if ( this.cellIsO( cn ) || this.cellIsFree( cn ) ) { // i.e. it is not a win combo for x
-            console.log( `No impending NEG DIAG doom` );
+            console.log( `No impending POS DIAG doom` );
             break; // break out of D LOOP
           }
           if (d === numRows - 1) { // i.e. we've finished iterating and it didn't break so it must be a line with only x's
@@ -111,9 +130,7 @@ const ai = {
             console.log( `Block cell found: ${blockCell}` );
             return blockCell;
           }
-        } // end iterating through neg diag
-
-
+        } // end iterating through pos diag
 
 
         // if we haven't returned a blockCell, then remove simulation
