@@ -2,26 +2,20 @@
 ## Tic Tac Toe
 
 ###### It's Tic Tac Toe.
-###### BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!WOW!!!!^
+###### BUT LIKE YOU'VE NEVER SEEN IT BEFORE!!!!!!!!!!!!!BANG!!!!!!!!!!!!!!!!!!!!!WOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
-<sub><sup>*^Actually exactly like you've seen it before.*</sup></sub>
+<sub><sup>*^Actually exactly like you've seen it before*</sup></sub>
 
 
 
-
+*************************************
 
 Built with:
 - HTML
 - CSS
 - Javascript inc. jQuery
-
-
-
-
-
-
 
 
 *************************************
