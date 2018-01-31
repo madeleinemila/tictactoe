@@ -16,7 +16,7 @@ BUT LIKE YOU'VE NEVER SEEN IT BEFORE^
 Built with:
 - HTML5
 - CSS3
-- Javascript inc. jQuery
+- JavaScript inc. jQuery
 
 
 *************************************
@@ -51,6 +51,13 @@ IN TWO PLAYER MODE:
 There are a total of 10 levels to startle and amaze.
 Enjoy your journey.
 
+
+*************************************
+BONUS
+*************************************
+
+There are actually infinite levels - call `levelUp()` from the console to go up another level.
+However, for player sense of accomplishment and to avoid dealing with super tiny fonts, I limited the normal gameplay to ten levels.
 
 *************************************
 SCREENSHOT
